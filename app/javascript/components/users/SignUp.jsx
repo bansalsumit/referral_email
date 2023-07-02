@@ -26,8 +26,6 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function SignUp() {
@@ -38,9 +36,6 @@ export default function SignUp() {
     const params = new URLSearchParams();
     params.append('user[email]', 'sbansal.mait@gmail.com');
     params.append('user[password]', 'Test@123');
-    // params.append('user[password_confirmation]', 'Test@123');
-    // params.append('authenticity_token', token);
-    // params.append('commit', 'Sign up');
     
     fetch(url, {
       method: "POST",
@@ -50,16 +45,15 @@ export default function SignUp() {
         "Accept": "text/vnd.turbo-stream.html, text/html, application/xhtml+xml"
       },
       body: params.toString(),
-      // body: { user: {email: "sbansal.mait@gmail.com", password: "Test@123", password_confirmation: 'Test@123'}, authenticity_token: token, commit: "Sign up"},
     })
       .then((response) => {
-        // if (response.ok) {
-        //   return response.json();
-        // }
-        // throw new Error("Network response was not ok.");
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
       })
-      // .then((response) => navigate(`/`))
-      // .catch((error) => console.log(error.message));
+      .then((response) => navigate(`/`))
+      .catch((error) => console.log(error.message));
   };
 
   return (
